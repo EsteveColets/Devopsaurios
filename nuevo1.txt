@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:template match="/datos">
+        <html>
+            <head>
+                <title>Información de red</title>
+                <style>
+                    body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f2f2f2;
+                    margin: 20px;
+                    }
+                    h2 {
+                    color: #333;
+                    margin-bottom: 10px;
+                    }
+                    table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    background-color: #fff;
+                    margin-bottom: 20px;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                    }
+                    th, td {
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    text-align: left;
+                    }
+                    th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                    color: #333;
+                    }
+                    tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Información de red</h2>
+                <table>
+                    <tr>
+                        <th>IP</th>
+                        <th>Máscara</th>
+                        <th>Puerta de Enlace</th>
+                        <th>DNS Primario</th>
+                        <th>Media</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <xsl:value-of select="IP" />
+                        </td>
+                        <td>
+                            <xsl:value-of select="Mascara" />
+                        </td>
+                        <td>
+                            <xsl:value-of select="PuertaDeEnlace" />
+                        </td>
+                        <td>
+                            <xsl:value-of select="DNSPrimario" />
+                        </td>
+                        <td>
+                            <xsl:value-of select="Media" />
+                        </td>
+                    </tr>
+                </table>
+                <h2>Saltos</h2>
+                <table>
+                    <tr>
+                        <th>Número de Saltos</th>
+                        <th>IP</th>
+                    </tr>
+                    <xsl:for-each select="Saltos/ip">
+                        <tr>
+                            <td>
+                                <xsl:value-of select="position()" />
+                            </td>
+                            <td>
+                                <xsl:value-of select="." />
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+</xsl:stylesheet>
